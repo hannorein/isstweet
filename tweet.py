@@ -58,7 +58,7 @@ for m in makelist(table):
 
 now = datetime.now()
 
-debug = True
+debug = False
 for m in makelist(table):
     date, mag, starttime, startalt, startaz, hightime, highalt, highaz, endtime, endalt, endaz, passtype, link = m
     fn = "".join(x for x in date+starttime if x.isalnum())+".png"
@@ -73,7 +73,7 @@ for m in makelist(table):
         if not os.path.isfile(ft1) or debug:
             debug = False # only once
             with open(ft1, 'w') as f:
-                message = "#ISS flying over #Toronto in 1 hour! Track {0} to {1}, altitude {2}deg, mag {3}. 🚀 {4}".format(startaz, endaz, highalt[0:-1], mag,urllib.quote(link))
+                message = "#ISS flying over #Toronto in 1 hour from now! Track {0} to {1}, altitude {2}deg, mag {3}. 🚀 {4}".format(startaz, endaz, highalt[0:-1], mag,urllib.quote(link))
                 print(len(message), message)
                 f.write(message)
 
