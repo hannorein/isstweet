@@ -68,7 +68,7 @@ for m in makelist(table):
     minutes = (start - now).total_seconds() / 60.0
     ft = "".join(x for x in date+starttime if x.isalnum())+".tweeted"
     # tweet 1 hour before
-    if (minutes <61. and minutes > 59.) or debug:
+    if (minutes <61. and minutes > 57.) or debug:
         ft1 = "tweeted1/"+ft
         if not os.path.isfile(ft1) or debug:
             debug = False # only once
@@ -81,25 +81,25 @@ for m in makelist(table):
     # tweet 10 minutes before
     if (minutes <11. and minutes > 9.) or debug:
         ft2 = "tweeted2/"+ft
-        if not os.path.isfile(ft1) or debug:
+        if not os.path.isfile(ft2) or debug:
             debug = False # only once
-            with open(ft1, 'w') as f:
+            with open(ft2, 'w') as f:
                 message = "#ISS flying over #Toronto in 10 minutes! Track {0} to {1}, altitude {2}deg, mag {3}. 🚀 {4}".format(startaz, endaz, highalt[0:-1], mag,urllib.quote(link))
                 print(len(message), message)
                 f.write(message)
 
-            os.system("bash uploadToTwitter.bash %s %s"%(ft1,fn))
+            os.system("bash uploadToTwitter.bash %s %s"%(ft2,fn))
     # tweet right now
     if (minutes <1. and minutes > -1) or debug:
-        ft2 = "tweeted3/"+ft
-        if not os.path.isfile(ft1) or debug:
+        ft3 = "tweeted3/"+ft
+        if not os.path.isfile(ft3) or debug:
             debug = False # only once
-            with open(ft1, 'w') as f:
+            with open(ft3, 'w') as f:
                 message = "#ISS flying over #Toronto right now! Look up! Track {0} to {1}, altitude {2}deg, mag {3}. 🚀 {4}".format(startaz, endaz, highalt[0:-1], mag,urllib.quote(link))
                 print(len(message), message)
                 f.write(message)
 
-            os.system("bash uploadToTwitter.bash %s %s"%(ft1,fn))
+            os.system("bash uploadToTwitter.bash %s %s"%(ft3,fn))
 
     
 
